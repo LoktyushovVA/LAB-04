@@ -65,3 +65,12 @@ void print_in_binary(const void* data, size_t size)
         }
     }
 }
+struct Student
+{
+    char name[17];
+    uint32_t year;
+    float sred_ball;
+    int sex:1;
+    uint8_t courses;
+    Student*starosta;
+};
