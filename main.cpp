@@ -74,3 +74,57 @@ struct Student
     uint8_t courses;
     Student*starosta;
 };
+int main()
+{
+    assert(nibble_to_hex(0x0) == '0');
+    assert(nibble_to_hex(0x1) == '1');
+    assert(nibble_to_hex(0x2) == '2');
+    assert(nibble_to_hex(0x3) == '3');
+    assert(nibble_to_hex(0x4) == '4');
+    assert(nibble_to_hex(0x5) == '5');
+    assert(nibble_to_hex(0x6) == '6');
+    assert(nibble_to_hex(0x7) == '7');
+    assert(nibble_to_hex(0x8) == '8');
+    assert(nibble_to_hex(0x9) == '9');
+    assert(nibble_to_hex(0xa) == 'a');
+    assert(nibble_to_hex(0xb) == 'b');
+    assert(nibble_to_hex(0xc) == 'c');
+    assert(nibble_to_hex(0xd) == 'd');
+    assert(nibble_to_hex(0xe) == 'e');
+    assert(nibble_to_hex(0xf) == 'f');
+    Student studarray[3]=
+    {
+        {"Roman", 2000, 4.3, 0, 7, &studarray[1]},
+        {"Sergey", 1998, 4.0, 1, 7, nullptr },
+        {"Ivan", 2000, 3.4, 1, 7, &studarray[1]}
+    };
+    cout<<"Address of array: "<< &studarray<<'\n';
+    cout<<"Size of array: "<< sizeof(studarray)<<'\n';
+    cout<<"\t Address of elem:\t Size of elem:\n";
+    for (int i=0; i<3; i++)
+    {
+        cout<<i<<":\t "<<&studarray[i]<<"\t\t "<< sizeof(studarray[i])<<'\n';
+    }
+    cout<<"FIRST ELEMENT\n";
+    cout<<"\t Address of field: \t Size of field\t Offset:\n";
+    cout<<"NAME: \t\t"<<&studarray[0].name<<"\t\t"<<sizeof(studarray[0].name)
+        <<'\t'<<offsetof(struct Student, name)<<'\n';
+    cout<<"Binary: ";
+    print_in_binary(&studarray[0].name, sizeof(studarray[0].name));
+    cout<<"Hex: ";
+    print_in_hex(&studarray[0].name, sizeof(studarray[0].name));
+    cout<<"\nYEAR: \t\t"<<&studarray[0].year <<"\t\t"<<sizeof(studarray[0].year)
+        <<'\t'<<offsetof(struct Student, year)<<'\n';
+    cout<<"Binary: ";
+    print_in_binary(&studarray[0].year, sizeof(studarray[0].year));
+    cout<<"Hex: ";
+    print_in_hex(&studarray[0].year, sizeof(studarray[0].year));
+    cout<<"\nSRED BALL: \t\t"<<&studarray[0].sred_ball<<"\t\t"
+        <<sizeof(studarray[0].sred_ball)
+        <<'\t'<<offsetof(struct Student, sred_ball)<<'\n';
+    cout<<"Binary: ";
+    print_in_binary(&studarray[0].sred_ball, sizeof(studarray[0].sred_ball));
+    cout<<"Hex: ";
+    print_in_hex(&studarray[0].sred_ball, sizeof(studarray[0].sred_ball));
+    return 0;
+}
