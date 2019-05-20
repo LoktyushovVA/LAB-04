@@ -9,11 +9,15 @@ char nibble_to_hex (uint8_t i)
     return digits[i];
 }
 void print_in_hex (uint8_t byte)
-{
+{ //переводит одну половину потом другую
     cout << nibble_to_hex(byte >> 4)
-         << nibble_to_hex(byte & 0xf);
+         << nibble_to_hex(byte & 0xf);//вторая половина
 }
 const uint8_t* as_bytes(const void* data)
+//передаем непонятную херню для того чтобы сделать понятную
+//значение одного типа нужна трактовать как значение дргуго
+
+
 {
     return reinterpret_cast<const uint8_t*>(data);
 }
@@ -65,6 +69,41 @@ void print_in_binary(const void* data, size_t size)
         }
     }
 }
+
+void bitcalc()
+{
+    uint16_t operand1,operand2,result;
+    char op; // îïðåàòîð
+
+    cin>> operand1>>op>>operand2;
+    assert(op == '&' || op=='|' || op=='^');
+    switch (op)
+    {
+    case '&':
+        result = operand1 & operand2;
+        break;
+    case '|':
+        result = operand1 | operand2;
+        break;
+    case '^':
+        result = operand1 ^ operand2;
+        break;
+  //  default: cout<<"incorrect operator";
+    }
+    print_in_hex(&operand1, sizeof(operand1));
+    cout<<op<<" ";
+    print_in_hex(&operand2, sizeof(operand2));
+    cout<<"= ";
+    print_in_hex(&result, sizeof(result));
+    cout<<'\n';
+
+    print_in_binary(&operand1, sizeof(operand1));
+    cout<<op<<" ";
+    print_in_binary(&operand2, sizeof(operand2));
+    cout<<"= ";
+    print_in_binary(&result, sizeof(result));
+}
+
 struct Student
 {
     char name[17];
@@ -76,6 +115,7 @@ struct Student
 };
 int main()
 {
+    bitcalc();
     assert(nibble_to_hex(0x0) == '0');
     assert(nibble_to_hex(0x1) == '1');
     assert(nibble_to_hex(0x2) == '2');
@@ -94,9 +134,9 @@ int main()
     assert(nibble_to_hex(0xf) == 'f');
     Student studarray[3]=
     {
-        {"Roman", 2000, 4.3, 0, 7, &studarray[1]},
-        {"Sergey", 1998, 4.0, 1, 7, nullptr },
-        {"Ivan", 2000, 3.4, 1, 7, &studarray[1]}
+        {"Nicolai", 2001, 4.7, 0, 7, &studarray[1]},
+        {"Sofia", 1999, 4.2, 1, 7, nullptr },
+        {"Ruslan", 2000, 3.8, 1, 7, &studarray[1]}
     };
     cout<<"Address of array: "<< &studarray<<'\n';
     cout<<"Size of array: "<< sizeof(studarray)<<'\n';
